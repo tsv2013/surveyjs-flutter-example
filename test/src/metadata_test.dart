@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:surveyjs_flutter_example/src/metadata.dart';
 

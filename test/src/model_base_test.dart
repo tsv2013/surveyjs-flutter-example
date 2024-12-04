@@ -9,7 +9,7 @@ void main() {
       var jsonObj = json.decode(raw);
       var obj = ModelBase.fromJson(jsonObj);
       expect(obj.type, 'text');
-      expect(obj['value'], null);
+      expect(() => obj['value'], throwsA(TypeMatcher<AssertionError>()));
       obj = ModelBase.fromJson(jsonObj, ['value']);
       expect(obj.type, 'text');
       expect(obj['value'], 'some string');

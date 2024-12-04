@@ -37,6 +37,11 @@ class Metadata {
     Metadata._descriptors[Symbol(objDescriptor.type)] = objDescriptor;
   }
 
+  static registerObjectDescription(dynamic jsonDescription) {
+    ObjectDescriptor objDescriptor = ObjectDescriptor.fromJson(jsonDescription);
+    Metadata._descriptors[Symbol(objDescriptor.type)] = objDescriptor;
+  }
+
   static ObjectDescriptor? findObjectDescriptor(String type) {
     return Metadata._descriptors[Symbol(type)];
   }
