@@ -1,0 +1,13 @@
+{
+    "type": "survey",
+    "elements": [
+        {
+            "type": "question",
+            "title": "Question 1"
+        },
+        {
+            "type": "question",
+            "title": "Another question title"
+        }
+    ]
+}

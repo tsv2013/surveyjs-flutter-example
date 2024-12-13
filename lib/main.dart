@@ -1,8 +1,14 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'src/element_factory.dart';
 import 'src/metadata.dart';
 import 'src/survey.dart';
 import 'src/questions/question.dart';
+
+Future<Map> loadSurveyJson() async {
+  return jsonDecode(await rootBundle.loadString('assets/survey.json'));
+}
 
 void main() {
   Metadata.registerObjectDescription(Question.description);
@@ -113,14 +119,39 @@ class _MyHomePageState extends State<MyHomePage> {
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            SurveyWidget(Survey({
-              'type': 'survey',
-              'elements': [
-                {'type': 'question', 'title': 'Question 1'},
-                {'type': 'question', 'title': 'Another question'}
-              ]
-            }))
+          children: [
+            FutureBuilder<Map>(
+              builder: (BuildContext context, AsyncSnapshot<Map> snapshot) {
+                if (snapshot.hasData) {
+                  return SurveyWidget(Survey(snapshot.data));
+                } else if (snapshot.hasError) {
+                  return Column(children: [
+                    const Icon(
+                      Icons.error_outline,
+                      color: Colors.red,
+                      size: 60,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 16),
+                      child: Text('Error: ${snapshot.error}'),
+                    ),
+                  ]);
+                } else {
+                  return const Column(children: [
+                    SizedBox(
+                      width: 60,
+                      height: 60,
+                      child: CircularProgressIndicator(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 16),
+                      child: Text('Awaiting result...'),
+                    ),
+                  ]);
+                }
+              },
+              future: loadSurveyJson(),
+            )
           ],
         ),
       ),
