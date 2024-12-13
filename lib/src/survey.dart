@@ -1,30 +1,48 @@
 import 'package:flutter/material.dart';
-import 'model_bloc.dart';
 import 'metadata.dart';
+import 'survey_element.dart';
 import 'widget_factory.dart';
 
-class Survey extends ModelBloc {
+class Survey extends SurveyElement {
   static final description = {
     "type": "survey",
     "properties": [
       'title',
+      {"name": 'elements', "type": 'element[]'}
     ]
   };
-  Survey(dynamic json) : super.fromJson(json ?? {});
+  Survey([super.json]);
+
+  @override
+  add(String propertyName, [dynamic value]) {
+    if (propertyName == 'elements') {
+      var els =
+          (value as List<dynamic>).map((el) => el as SurveyElement).toList();
+      super.add(propertyName, els);
+    } else {
+      super.add(propertyName, value);
+    }
+  }
+
+  List<SurveyElement> get elements {
+    return get('elements');
+  }
+
+  set elements(List<SurveyElement> elementsValue) {
+    set('elements', elementsValue);
+  }
 }
 
 class SurveyWidget extends StatelessWidget {
-  const SurveyWidget({super.key});
+  final Survey survey;
+  const SurveyWidget(this.survey, {super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: ['prop1', 'prop2'].map<Widget>((String propertyName) {
-        return WidgetFactory.create(propertyName, {});
+      children: survey.elements.map<Widget>((SurveyElement element) {
+        return WidgetFactory.create(element.type, [element]);
       }).toList(),
     );
   }
 }
-
-// Metadata.registerObjectDescription(Survey.description);

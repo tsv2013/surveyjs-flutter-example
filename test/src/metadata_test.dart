@@ -14,8 +14,15 @@ void main() {
       };
       var objDescriptor = ObjectDescriptor.fromJson(jsonDescription);
       Metadata.registerObject(objDescriptor);
-      expect(Metadata.getObjectPropertyNames('text'),
+      expect(
+          Metadata.findPropertyDescriptors('text')
+              .map((pd) => pd.name)
+              .toList(),
           ['strProperty', 'numProperty', 'boolProperty']);
+      var propDescriptor =
+          Metadata.findPropertyDescriptor('text', 'numProperty');
+      expect(propDescriptor != null, true);
+      expect(propDescriptor!.type, 'number');
     });
   });
 }

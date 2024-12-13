@@ -1,3 +1,7 @@
+import 'package:surveyjs_flutter_example/src/element_factory.dart';
+import 'package:surveyjs_flutter_example/src/metadata.dart';
+import 'package:surveyjs_flutter_example/src/survey_element.dart';
+
 class ModelBase {
   late final String type;
 
@@ -6,13 +10,23 @@ class ModelBase {
 
   ModelBase({this.type = ''});
 
-  ModelBase.fromJson(dynamic json, [List<String>? dynamicProperties]) {
-    type = json['type'];
+  ModelBase.fromJson(dynamic json,
+      [List<PropertyDescriptor>? dynamicProperties]) {
+    type = json['type'] ?? '';
     assert(type != '', "Object type shouldn't be empty");
 
     if (dynamicProperties != null) {
-      for (var propertyName in dynamicProperties) {
-        add(propertyName, json[propertyName]);
+      for (var propertyDescriptor in dynamicProperties) {
+        dynamic value = json?[propertyDescriptor.name];
+        if (propertyDescriptor.isArray) {
+          if (propertyDescriptor.isComplexType) {
+            value = (json?[propertyDescriptor.name] ?? [])
+                .map((obj) => ElementFactory.create(obj['type'], [obj]))
+                .toList();
+          }
+          value ??= [];
+        }
+        add(propertyDescriptor.name, value);
       }
     }
   }
@@ -32,7 +46,7 @@ class ModelBase {
   dynamic operator [](String key) => get(key);
   operator []=(String key, dynamic value) => set(key, value);
 
-  add(String propertyName, dynamic value) {
+  add(String propertyName, [dynamic value]) {
     _properties[Symbol(propertyName)] = propertyName;
     _values[Symbol(propertyName)] = value;
   }

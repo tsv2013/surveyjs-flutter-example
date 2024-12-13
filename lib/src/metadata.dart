@@ -1,10 +1,22 @@
 class PropertyDescriptor {
   final String name;
   late final String type;
+  late final bool isArray;
+  late final bool isComplexType;
 
-  PropertyDescriptor(this.name, {this.type = 'string'});
+  PropertyDescriptor(this.name,
+      {this.type = 'string', this.isArray = false, this.isComplexType = false});
   PropertyDescriptor.fromDescription(this.name, dynamic jsonDescription) {
-    type = jsonDescription != null ? jsonDescription['type'] : 'string';
+    String declaredType =
+        jsonDescription != null ? jsonDescription['type'] : 'string';
+    if (declaredType.endsWith('[]')) {
+      isArray = true;
+      type = declaredType.substring(0, declaredType.length - 2);
+    } else {
+      isArray = false;
+      type = declaredType;
+    }
+    isComplexType = !['string', 'bool', 'number'].contains(type);
   }
   PropertyDescriptor.fromJson(dynamic jsonDescription)
       : this.fromDescription(
@@ -46,9 +58,15 @@ class Metadata {
     return Metadata._descriptors[Symbol(type)];
   }
 
-  static List<String>? getObjectPropertyNames(String type) {
-    return Metadata._descriptors[Symbol(type)]?.properties.values
-        .map((propertyDescriptor) => propertyDescriptor.name)
-        .toList();
+  static List<PropertyDescriptor> findPropertyDescriptors(String? type) {
+    if (type == null) return [];
+    return Metadata._descriptors[Symbol(type)]?.properties.values.toList() ??
+        [];
+  }
+
+  static PropertyDescriptor? findPropertyDescriptor(
+      String type, String propertyName) {
+    return Metadata
+        ._descriptors[Symbol(type)]?.properties[Symbol(propertyName)];
   }
 }

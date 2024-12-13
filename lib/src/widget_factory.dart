@@ -7,9 +7,10 @@ class WidgetFactory {
     _widgets[type] = constructor;
   }
 
-  static Widget create(String type, Map<String, dynamic> arguments) {
-    Map<Symbol, dynamic> args = arguments.map((k, v) => MapEntry(Symbol(k), v));
+  static Widget create(String type,
+      [List<dynamic> argsp = const [], Map<String, dynamic> argsn = const {}]) {
+    Map<Symbol, dynamic> args = argsn.map((k, v) => MapEntry(Symbol(k), v));
     var constructor = _widgets[type];
-    return Function.apply(constructor ?? SkeletonWidget.new, [], args);
+    return Function.apply(constructor ?? SkeletonWidget.new, argsp, args);
   }
 }

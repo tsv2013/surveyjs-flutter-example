@@ -1,29 +1,40 @@
 import 'package:flutter/material.dart';
+import '../survey_element.dart';
 import '../model_bloc.dart';
 import '../metadata.dart';
 
-class Question extends ModelBloc {
+class Question extends SurveyElement {
   static final description = {
-    "type": "question",
-    "properties": [
+    'type': 'question',
+    'properties': [
       'title',
       'value',
     ]
   };
-  Question(dynamic json) : super.fromJson(json ?? {});
+  Question([dynamic json])
+      : super(json ?? {'type': Question.description['type']});
+  dynamic get value {
+    return get('value');
+  }
+
+  set value(dynamic newValue) {
+    set('value', newValue);
+  }
 }
 
 class QuestionWidget extends StatelessWidget {
-  const QuestionWidget({super.key});
+  final SurveyElement surveyElement;
+  const QuestionWidget(this.surveyElement, {super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        Text(
-          'Question',
-        )
+        TextFormField(
+            decoration: InputDecoration(
+                labelText: surveyElement.title ?? '',
+                border: const OutlineInputBorder()))
       ],
     );
   }

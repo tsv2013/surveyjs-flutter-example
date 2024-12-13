@@ -7,16 +7,18 @@ class ModelBloc extends ModelBase {
   final _notifiers = <Symbol, StreamController>{};
 
   ModelBloc.fromJson(dynamic json)
-      : super.fromJson(json, Metadata.getObjectPropertyNames(json['type']));
+      : super.fromJson(json ?? {'type': 'modelbloc'},
+            Metadata.findPropertyDescriptors(json?['type']));
 
   @override
-  add(String propertyName, dynamic value) {
+  add(String propertyName, [dynamic value]) {
     super.add(propertyName, value);
     _notifiers[Symbol(propertyName)] = StreamController.broadcast();
   }
 
   @override
   set(String key, dynamic value) {
+    super.set(key, value);
     getChangesStream(key).add(value);
   }
 
