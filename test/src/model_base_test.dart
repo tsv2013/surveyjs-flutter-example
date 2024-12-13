@@ -11,7 +11,7 @@ void main() {
       var jsonObj = json.decode(raw);
       var obj = ModelBase.fromJson(jsonObj);
       expect(obj.type, 'text');
-      expect(() => obj['value'], throwsA(TypeMatcher<AssertionError>()));
+      expect(() => obj['value'], throwsA(const TypeMatcher<AssertionError>()));
       obj = ModelBase.fromJson(jsonObj, [PropertyDescriptor('value')]);
       expect(obj.type, 'text');
       expect(obj['value'], 'some string');
@@ -40,6 +40,7 @@ void main() {
         ]
       }, Metadata.findPropertyDescriptors('custom'));
       var elements = obj['elements'] as List<dynamic>;
+      // ignore: unnecessary_null_comparison
       expect(elements != null, true);
       expect(elements.length, 1);
       expect(elements[0].type, 'element');

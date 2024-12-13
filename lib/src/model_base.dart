@@ -1,6 +1,5 @@
-import 'package:surveyjs_flutter_example/src/element_factory.dart';
-import 'package:surveyjs_flutter_example/src/metadata.dart';
-import 'package:surveyjs_flutter_example/src/survey_element.dart';
+import 'element_factory.dart';
+import 'metadata.dart';
 
 class ModelBase {
   late final String type;

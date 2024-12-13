@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:surveyjs_flutter_example/src/metadata.dart';
-import 'package:surveyjs_flutter_example/src/model_base.dart';
+import 'metadata.dart';
+import 'model_base.dart';
 
 class ModelBloc extends ModelBase {
   final _notifiers = <Symbol, StreamController>{};

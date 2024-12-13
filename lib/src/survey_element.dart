@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import './model_bloc.dart';
-import './metadata.dart';
 
 class SurveyElement extends ModelBloc {
   static final description = {

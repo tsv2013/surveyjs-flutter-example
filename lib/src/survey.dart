@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'metadata.dart';
 import 'survey_element.dart';
 import 'widget_factory.dart';
 

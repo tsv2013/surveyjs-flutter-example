@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import '../survey_element.dart';
-import '../model_bloc.dart';
-import '../metadata.dart';
 
 class Question extends SurveyElement {
   static final description = {
