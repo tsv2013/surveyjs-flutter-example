@@ -12,7 +12,7 @@ class ModelBase {
   ModelBase.fromJson(dynamic json,
       [List<PropertyDescriptor>? dynamicProperties]) {
     type = json['type'] ?? '';
-    assert(type != '', "Object type shouldn't be empty");
+    // assert(type != '', "Object type shouldn't be empty");
 
     if (dynamicProperties != null) {
       for (var propertyDescriptor in dynamicProperties) {
@@ -20,7 +20,8 @@ class ModelBase {
         if (propertyDescriptor.isArray) {
           if (propertyDescriptor.isComplexType) {
             value = (json?[propertyDescriptor.name] ?? [])
-                .map((obj) => ElementFactory.create(obj['type'], [obj]))
+                .map((obj) => ElementFactory.create(
+                    obj['type'] ?? propertyDescriptor.type, [obj]))
                 .toList();
           }
           value ??= [];

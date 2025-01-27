@@ -8,6 +8,14 @@
         {
             "type": "question",
             "title": "Another question title"
+        },
+        {
+            "type": "questionselect",
+            "title": "Question select title",
+            "choices": [
+                {"text": "Choice 1", "value": "item1"},
+                {"text": "Choice 2", "value": "item2"}
+            ]
         }
     ]
 }

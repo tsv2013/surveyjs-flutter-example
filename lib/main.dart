@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'src/widget_factory.dart';
 import 'src/element_factory.dart';
 import 'src/metadata.dart';
+import 'src/questions/item_value.dart';
+import 'src/questions/question_select.dart';
 import 'src/survey.dart';
 import 'src/questions/question.dart';
 
@@ -11,10 +14,17 @@ Future<Map> loadSurveyJson() async {
 }
 
 void main() {
+  Metadata.registerObjectDescription(ItemValue.description);
+  Metadata.registerObjectDescription(QuestionSelect.description);
   Metadata.registerObjectDescription(Question.description);
   Metadata.registerObjectDescription(Survey.description);
 
+  ElementFactory.register('itemvalue', ItemValue.new);
+  ElementFactory.register('questionselect', QuestionSelect.new);
   ElementFactory.register('question', Question.new);
+
+  WidgetFactory.register('question', QuestionWidget.new);
+  WidgetFactory.register('questionselect', QuestionSelectWidget.new);
 
   runApp(const MyApp());
 }

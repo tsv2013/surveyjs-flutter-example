@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import './item_value.dart';
+import './question.dart';
+
+class QuestionSelect extends Question {
+  static final description = {
+    'type': 'questionselect',
+    'properties': [
+      'title',
+      'value',
+      {"name": 'choices', "type": 'itemvalue[]'}
+    ]
+  };
+  QuestionSelect([dynamic json])
+      : super(json ?? {'type': QuestionSelect.description['type']});
+  @override
+  add(String propertyName, [dynamic value]) {
+    if (propertyName == 'choices') {
+      var els = (value as List<dynamic>).map((el) => el as ItemValue).toList();
+      super.add(propertyName, els);
+    } else {
+      super.add(propertyName, value);
+    }
+  }
+
+  List<ItemValue> get choices {
+    return get('choices');
+  }
+
+  set choices(List<ItemValue> choicesValue) {
+    set('choices', choicesValue);
+  }
+}
+
+class QuestionSelectWidget extends StatelessWidget {
+  final QuestionSelect questionSelect;
+  const QuestionSelectWidget(this.questionSelect, {super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextFormField(
+            decoration: InputDecoration(
+                labelText: questionSelect.title ?? '',
+                border: const OutlineInputBorder())),
+        Checkbox(
+          tristate: true,
+          value: false,
+          onChanged: (bool? value) {},
+        )
+      ],
+    );
+  }
+}
+
+// Metadata.registerObjectDescription(Question.description);
