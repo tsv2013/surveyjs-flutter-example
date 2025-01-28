@@ -9,8 +9,8 @@ class Question extends SurveyElement {
       'value',
     ]
   };
-  Question([dynamic json])
-      : super(json ?? {'type': Question.description['type']});
+  Question([dynamic json, String? type])
+      : super(json, type ?? Question.description['type'].toString());
   dynamic get value {
     return get('value');
   }

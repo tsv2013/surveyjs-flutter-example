@@ -7,8 +7,9 @@ class SurveyElement extends ModelBloc {
       'title',
     ]
   };
-  SurveyElement([dynamic json])
-      : super.fromJson(json ?? {'type': SurveyElement.description['type']});
+  SurveyElement([dynamic json, String? type])
+      : super.fromJson(
+            json, type ?? SurveyElement.description['type'].toString());
   String? get title {
     return get('title');
   }

@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 16),
-                      child: Text('Awaiting result...'),
+                      child: Text('Loading...'),
                     ),
                   ]);
                 }

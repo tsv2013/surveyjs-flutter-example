@@ -10,7 +10,7 @@ class Survey extends SurveyElement {
       {"name": 'elements', "type": 'element[]'}
     ]
   };
-  Survey([super.json]);
+  Survey([dynamic json]) : super(json, Survey.description['type'].toString());
 
   @override
   add(String propertyName, [dynamic value]) {

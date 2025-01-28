@@ -12,7 +12,7 @@ class QuestionSelect extends Question {
     ]
   };
   QuestionSelect([dynamic json])
-      : super(json ?? {'type': QuestionSelect.description['type']});
+      : super(json, QuestionSelect.description['type'].toString());
   @override
   add(String propertyName, [dynamic value]) {
     if (propertyName == 'choices') {

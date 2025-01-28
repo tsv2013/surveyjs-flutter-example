@@ -9,25 +9,24 @@ class ModelBase {
 
   ModelBase({this.type = ''});
 
-  ModelBase.fromJson(dynamic json,
-      [List<PropertyDescriptor>? dynamicProperties]) {
-    type = json['type'] ?? '';
+  ModelBase.fromJson(dynamic json, [String? type]) {
+    this.type = type ?? (json['type'] ?? '');
+    List<PropertyDescriptor>? dynamicProperties =
+        Metadata.findPropertyDescriptors(this.type);
     // assert(type != '', "Object type shouldn't be empty");
 
-    if (dynamicProperties != null) {
-      for (var propertyDescriptor in dynamicProperties) {
-        dynamic value = json?[propertyDescriptor.name];
-        if (propertyDescriptor.isArray) {
-          if (propertyDescriptor.isComplexType) {
-            value = (json?[propertyDescriptor.name] ?? [])
-                .map((obj) => ElementFactory.create(
-                    obj['type'] ?? propertyDescriptor.type, [obj]))
-                .toList();
-          }
-          value ??= [];
+    for (var propertyDescriptor in dynamicProperties) {
+      dynamic value = json?[propertyDescriptor.name];
+      if (propertyDescriptor.isArray) {
+        if (propertyDescriptor.isComplexType) {
+          value = (json?[propertyDescriptor.name] ?? [])
+              .map((obj) => ElementFactory.create(
+                  obj['type'] ?? propertyDescriptor.type, [obj]))
+              .toList();
         }
-        add(propertyDescriptor.name, value);
+        value ??= [];
       }
+      add(propertyDescriptor.name, value);
     }
   }
 

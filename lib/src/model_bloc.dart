@@ -6,9 +6,8 @@ import 'model_base.dart';
 class ModelBloc extends ModelBase {
   final _notifiers = <Symbol, StreamController>{};
 
-  ModelBloc.fromJson(dynamic json)
-      : super.fromJson(json ?? {'type': 'modelbloc'},
-            Metadata.findPropertyDescriptors(json?['type']));
+  ModelBloc.fromJson(dynamic json, [String? type])
+      : super.fromJson(json ?? {'type': 'modelbloc'}, type ?? 'modelbloc');
 
   @override
   add(String propertyName, [dynamic value]) {

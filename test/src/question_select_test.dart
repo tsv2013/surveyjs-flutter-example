@@ -11,7 +11,6 @@ void main() {
       Metadata.registerObjectDescription(ItemValue.description);
       Metadata.registerObjectDescription(QuestionSelect.description);
       var obj = QuestionSelect({
-        'type': 'questionselect',
         'choices': [
           {'text': 'Choice 1', 'value': 'item1'},
           {'text': 'Choice 2', 'value': 'item2'}

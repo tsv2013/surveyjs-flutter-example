@@ -10,7 +10,7 @@ class ItemValue extends SurveyElement {
     ]
   };
   ItemValue([dynamic json])
-      : super(json ?? {'type': ItemValue.description['type']});
+      : super(json, ItemValue.description['type'].toString());
 
   String? get text {
     return get('text');
