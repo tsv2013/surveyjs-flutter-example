@@ -38,10 +38,19 @@ class SurveyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: survey.elements.map<Widget>((SurveyElement element) {
-        return WidgetFactory.create(element.type, [element]);
-      }).toList(),
-    );
+    return Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          children: survey.elements.map<Widget>((SurveyElement element) {
+            return Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
+                child: Column(children: [
+                  Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
+                      child: Row(children: [Text(element.title ?? '')])),
+                  WidgetFactory.create(element.type, [element])
+                ]));
+          }).toList(),
+        ));
   }
 }

@@ -40,17 +40,18 @@ class QuestionSelectWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        TextFormField(
-            decoration: InputDecoration(
-                labelText: questionSelect.title ?? '',
-                border: const OutlineInputBorder())),
-        Checkbox(
-          tristate: true,
-          value: false,
-          onChanged: (bool? value) {},
-        )
-      ],
+      children: questionSelect.choices.map<Widget>((ItemValue itemValue) {
+        return Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
+            child: Row(children: [
+              Checkbox(
+                tristate: true,
+                value: false,
+                onChanged: (bool? value) {},
+              ),
+              Text(itemValue.text ?? '')
+            ]));
+      }).toList(),
     );
   }
 }
