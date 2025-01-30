@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import '../survey_element.dart';
 
@@ -5,12 +7,21 @@ class Question extends SurveyElement {
   static final description = {
     'type': 'question',
     'properties': [
+      'name',
       'title',
       'value',
     ]
   };
   Question([dynamic json, String? type])
       : super(json, type ?? Question.description['type'].toString());
+  dynamic get name {
+    return get('name');
+  }
+
+  set name(dynamic newName) {
+    set('name', newName);
+  }
+
   dynamic get value {
     return get('value');
   }
@@ -21,18 +32,29 @@ class Question extends SurveyElement {
 }
 
 class QuestionWidget extends StatelessWidget {
-  final SurveyElement surveyElement;
-  const QuestionWidget(this.surveyElement, {super.key});
+  final Question question;
+  const QuestionWidget(this.question, {super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextFormField(
-            decoration: InputDecoration(
-                labelText: surveyElement.title ?? '',
-                border: const OutlineInputBorder()))
+        StreamBuilder(
+            stream:
+                (question.getChangesStream('value') as StreamController).stream,
+            initialData: question.value,
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              var controller = TextEditingController();
+              controller.text =
+                  question.value != null ? question.value.toString() : "";
+              return TextFormField(
+                  controller: controller,
+                  onChanged: (value) => question.value = value,
+                  decoration: InputDecoration(
+                      labelText: question.title ?? '',
+                      border: const OutlineInputBorder()));
+            })
       ],
     );
   }

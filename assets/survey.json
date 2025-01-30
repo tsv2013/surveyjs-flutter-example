@@ -3,14 +3,17 @@
     "elements": [
         {
             "type": "question",
+            "name": "question1",
             "title": "Question 1"
         },
         {
             "type": "question",
+            "name": "question2",
             "title": "Another question title"
         },
         {
             "type": "questionselect",
+            "name": "question3",
             "title": "Question select title",
             "choices": [
                 {"text": "Choice 1", "value": "item1"},
