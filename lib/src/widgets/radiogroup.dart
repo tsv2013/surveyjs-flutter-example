@@ -21,12 +21,11 @@ class RadioGroupWidget extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
                   // CheckboxListTile
                   child: Row(children: [
-                    Checkbox(
-                      tristate: true,
-                      value: snapshot.data.toString() ==
-                          itemValue.value.toString(),
-                      onChanged: (bool? value) {
-                        questionSelect.value = itemValue.value;
+                    Radio(
+                      groupValue: snapshot.data.toString(),
+                      value: itemValue.value.toString(),
+                      onChanged: (String? value) {
+                        questionSelect.value = value;
                       },
                     ),
                     Text(itemValue.text ?? '')

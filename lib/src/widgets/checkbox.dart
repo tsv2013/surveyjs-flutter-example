@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../questions/item_value.dart';
 import '../questions/question_select.dart';
 
-class RadioGroupWidget extends StatelessWidget {
+class CheckboxWidget extends StatelessWidget {
   final QuestionSelect questionSelect;
-  const RadioGroupWidget(this.questionSelect, {super.key});
+  const CheckboxWidget(this.questionSelect, {super.key});
 
   // This widget is the root of your application.
   @override

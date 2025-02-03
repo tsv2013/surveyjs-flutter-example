@@ -8,7 +8,7 @@ import 'src/questions/question_select.dart';
 import 'src/questions/question.dart';
 import 'src/survey.dart';
 import 'src/widget_factory.dart';
-import 'src/widgets/checkbox.dart';
+import 'src/widgets/radiogroup.dart';
 import 'src/widgets/question.dart';
 import 'src/widgets/survey.dart';
 
