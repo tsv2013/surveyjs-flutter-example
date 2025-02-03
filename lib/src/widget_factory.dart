@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'skeleton.dart';
+import 'widgets/skeleton.dart';
 
 class WidgetFactory {
   static final Map<String, dynamic> _widgets = {};

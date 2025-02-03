@@ -1,13 +1,16 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'src/widget_factory.dart';
 import 'src/element_factory.dart';
 import 'src/metadata.dart';
 import 'src/questions/item_value.dart';
 import 'src/questions/question_select.dart';
-import 'src/survey.dart';
 import 'src/questions/question.dart';
+import 'src/survey.dart';
+import 'src/widget_factory.dart';
+import 'src/widgets/checkbox.dart';
+import 'src/widgets/question.dart';
+import 'src/widgets/survey.dart';
 
 Future<Map> loadSurveyJson() async {
   return jsonDecode(await rootBundle.loadString('assets/survey.json'));
@@ -24,7 +27,7 @@ void main() {
   ElementFactory.register('question', Question.new);
 
   WidgetFactory.register('question', QuestionWidget.new);
-  WidgetFactory.register('questionselect', QuestionSelectWidget.new);
+  WidgetFactory.register('questionselect', RadioGroupWidget.new);
 
   runApp(const MyApp());
 }

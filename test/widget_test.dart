@@ -13,6 +13,7 @@ import 'package:surveyjs_flutter_example/src/metadata.dart';
 import 'package:surveyjs_flutter_example/src/questions/question.dart';
 import 'package:surveyjs_flutter_example/src/survey.dart';
 import 'package:surveyjs_flutter_example/src/survey_element.dart';
+import 'package:surveyjs_flutter_example/src/widgets/survey.dart';
 
 void main() {
   testWidgets('Basic rendering test', (WidgetTester tester) async {
