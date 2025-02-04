@@ -19,7 +19,7 @@ class RadioGroupWidget extends StatelessWidget {
             children: questionSelect.choices.map<Widget>((ItemValue itemValue) {
               return Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                  // CheckboxListTile
+                  // RadioListTile
                   child: Row(children: [
                     Radio(
                       groupValue: snapshot.data.toString(),
