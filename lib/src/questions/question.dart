@@ -4,6 +4,7 @@ class Question extends SurveyElement {
   static final description = {
     'type': 'question',
     'properties': [
+      'renderAs',
       'name',
       'title',
       'value',
@@ -27,5 +28,3 @@ class Question extends SurveyElement {
     set('value', newValue);
   }
 }
-
-// Metadata.registerObjectDescription(Question.description);

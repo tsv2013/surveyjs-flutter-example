@@ -12,9 +12,18 @@
             "title": "Another question title"
         },
         {
-            "type": "questionselect",
+            "type": "radiogroup",
             "name": "question3",
-            "title": "Question select title",
+            "title": "Question radiogroup title",
+            "choices": [
+                {"text": "Choice 1", "value": "item1"},
+                {"text": "Choice 2", "value": "item2"}
+            ]
+        },
+        {
+            "type": "checkbox",
+            "name": "question4",
+            "title": "Question checkbox title",
             "choices": [
                 {"text": "Choice 1", "value": "item1"},
                 {"text": "Choice 2", "value": "item2"}

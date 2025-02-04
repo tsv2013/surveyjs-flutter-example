@@ -5,14 +5,15 @@ class QuestionSelect extends Question {
   static final description = {
     'type': 'questionselect',
     'properties': [
+      'renderAs',
       'name',
       'title',
       'value',
       {"name": 'choices', "type": 'itemvalue[]'}
     ]
   };
-  QuestionSelect([dynamic json])
-      : super(json, QuestionSelect.description['type'].toString());
+  QuestionSelect([dynamic json, String? type])
+      : super(json, type ?? QuestionSelect.description['type'].toString());
   @override
   add(String propertyName, [dynamic value]) {
     if (propertyName == 'choices') {
@@ -31,5 +32,3 @@ class QuestionSelect extends Question {
     set('choices', choicesValue);
   }
 }
-
-// Metadata.registerObjectDescription(Question.description);

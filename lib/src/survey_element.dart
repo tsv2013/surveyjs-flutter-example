@@ -4,6 +4,7 @@ class SurveyElement extends ModelBloc {
   static final description = {
     'type': 'element',
     'properties': [
+      'renderAs',
       'title',
     ]
   };
@@ -16,5 +17,13 @@ class SurveyElement extends ModelBloc {
 
   set title(String? titleValue) {
     set('title', titleValue);
+  }
+
+  String? get renderAs {
+    return get('renderAs') ?? type;
+  }
+
+  set renderAs(String? newValue) {
+    set('renderAs', newValue);
   }
 }

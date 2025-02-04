@@ -4,6 +4,7 @@ class ItemValue extends SurveyElement {
   static final description = {
     'type': 'itemvalue',
     'properties': [
+      'renderAs',
       'text',
       'value',
     ]

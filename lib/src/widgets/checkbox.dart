@@ -23,10 +23,17 @@ class CheckboxWidget extends StatelessWidget {
                   child: Row(children: [
                     Checkbox(
                       tristate: true,
-                      value: snapshot.data.toString() ==
-                          itemValue.value.toString(),
+                      value: (snapshot.data ?? [])
+                          .contains(itemValue.value.toString()),
                       onChanged: (bool? value) {
-                        questionSelect.value = itemValue.value;
+                        List<String>? qValue = questionSelect.value;
+                        qValue ??= List<String>.empty(growable: true);
+                        if (value ?? false) {
+                          qValue.add(itemValue.value);
+                        } else {
+                          qValue.remove(itemValue.value);
+                        }
+                        questionSelect.value = qValue;
                       },
                     ),
                     Text(itemValue.text ?? '')

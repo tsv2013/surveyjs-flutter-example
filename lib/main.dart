@@ -4,10 +4,13 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'src/element_factory.dart';
 import 'src/metadata.dart';
 import 'src/questions/item_value.dart';
+import 'src/questions/question_checkbox.dart';
+import 'src/questions/question_radiogroup.dart';
 import 'src/questions/question_select.dart';
 import 'src/questions/question.dart';
 import 'src/survey.dart';
 import 'src/widget_factory.dart';
+import 'src/widgets/checkbox.dart';
 import 'src/widgets/radiogroup.dart';
 import 'src/widgets/question.dart';
 import 'src/widgets/survey.dart';
@@ -19,15 +22,20 @@ Future<Map> loadSurveyJson() async {
 void main() {
   Metadata.registerObjectDescription(ItemValue.description);
   Metadata.registerObjectDescription(QuestionSelect.description);
+  Metadata.registerObjectDescription(QuestionCheckbox.description);
+  Metadata.registerObjectDescription(QuestionRadiogroup.description);
   Metadata.registerObjectDescription(Question.description);
   Metadata.registerObjectDescription(Survey.description);
 
   ElementFactory.register('itemvalue', ItemValue.new);
   ElementFactory.register('questionselect', QuestionSelect.new);
+  ElementFactory.register('checkbox', QuestionCheckbox.new);
+  ElementFactory.register('radiogroup', QuestionRadiogroup.new);
   ElementFactory.register('question', Question.new);
 
   WidgetFactory.register('question', QuestionWidget.new);
-  WidgetFactory.register('questionselect', RadioGroupWidget.new);
+  WidgetFactory.register('checkbox', CheckboxWidget.new);
+  WidgetFactory.register('radiogroup', RadioGroupWidget.new);
 
   runApp(const MyApp());
 }
