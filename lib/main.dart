@@ -7,6 +7,7 @@ import 'src/questions/item_value.dart';
 import 'src/questions/question_checkbox.dart';
 import 'src/questions/question_radiogroup.dart';
 import 'src/questions/question_select.dart';
+import 'src/questions/question_text.dart';
 import 'src/questions/question.dart';
 import 'src/survey.dart';
 import 'src/widget_factory.dart';
@@ -14,6 +15,7 @@ import 'src/widgets/checkbox.dart';
 import 'src/widgets/radiogroup.dart';
 import 'src/widgets/question.dart';
 import 'src/widgets/survey.dart';
+import 'src/widgets/text.dart';
 
 Future<Map> loadSurveyJson() async {
   return jsonDecode(await rootBundle.loadString('assets/survey.json'));
@@ -25,6 +27,7 @@ void main() {
   Metadata.registerObjectDescription(QuestionCheckbox.description);
   Metadata.registerObjectDescription(QuestionRadiogroup.description);
   Metadata.registerObjectDescription(Question.description);
+  Metadata.registerObjectDescription(QuestionText.description);
   Metadata.registerObjectDescription(Survey.description);
 
   ElementFactory.register('itemvalue', ItemValue.new);
@@ -32,10 +35,12 @@ void main() {
   ElementFactory.register('checkbox', QuestionCheckbox.new);
   ElementFactory.register('radiogroup', QuestionRadiogroup.new);
   ElementFactory.register('question', Question.new);
+  ElementFactory.register('text', QuestionText.new);
 
   WidgetFactory.register('question', QuestionWidget.new);
   WidgetFactory.register('checkbox', CheckboxWidget.new);
   WidgetFactory.register('radiogroup', RadioGroupWidget.new);
+  WidgetFactory.register('text', TextWidget.new);
 
   runApp(const MyApp());
 }
@@ -122,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
@@ -172,7 +177,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               },
               future: loadSurveyJson(),
-            )
+            ),
+            const Divider()
           ],
         ),
       ),

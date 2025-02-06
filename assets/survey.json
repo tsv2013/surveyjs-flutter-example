@@ -1,5 +1,5 @@
 {
-    "type": "survey",
+    "title": "My Survey",
     "elements": [
         {
             "type": "question",
@@ -7,9 +7,10 @@
             "title": "Question 1"
         },
         {
-            "type": "question",
+            "type": "text",
             "name": "question2",
-            "title": "Another question title"
+            "inputType": "date",
+            "title": "Text question title"
         },
         {
             "type": "radiogroup",
