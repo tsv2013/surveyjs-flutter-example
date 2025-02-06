@@ -10,20 +10,23 @@ class SurveyElement extends ModelBloc {
   };
   SurveyElement([dynamic json, String? type])
       : super.fromJson(
-            json, type ?? SurveyElement.description['type'].toString());
+            json,
+            type ??
+                json['type'] ??
+                SurveyElement.description['type'].toString());
   String? get title {
-    return get('title');
+    return get('title', false);
   }
 
   set title(String? titleValue) {
     set('title', titleValue);
   }
 
-  String? get renderAs {
-    return get('renderAs') ?? type;
+  String get renderAs {
+    return get('renderAs', false) ?? type;
   }
 
-  set renderAs(String? newValue) {
+  set renderAs(String newValue) {
     set('renderAs', newValue);
   }
 }

@@ -30,9 +30,11 @@ class ModelBase {
     }
   }
 
-  dynamic get(String key) {
-    assert(
-        _values.containsKey(Symbol(key)), "Property should belong the object");
+  dynamic get(String key, [bool checkPropertyDefined = true]) {
+    if (checkPropertyDefined) {
+      assert(_values.containsKey(Symbol(key)),
+          "Property should belong the object");
+    }
     return _values[Symbol(key)];
   }
 

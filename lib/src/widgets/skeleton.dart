@@ -7,13 +7,15 @@ class SkeletonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        TextFormField(
-            decoration: InputDecoration(
-                labelText: surveyElement.title ?? '',
-                border: const OutlineInputBorder()))
-      ],
-    );
+    return Container(
+        decoration: BoxDecoration(border: Border.all()),
+        child: SizedBox(
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text("Type '${surveyElement.type}' is not visualized yet.")
+                  ],
+                ))));
   }
 }
