@@ -1,4 +1,5 @@
 import 'metadata.dart';
+import 'questions/question.dart';
 import 'survey_element.dart';
 
 abstract class IPanel {
@@ -45,5 +46,31 @@ class Panel extends SurveyElement implements IPanel {
   @override
   List<SurveyElement> getElements() {
     return elements;
+  }
+
+  Question? getQuestionByName(String name) {
+    for (var element in elements) {
+      if (element is Question && element.name == name) {
+        return element;
+      }
+      if (element is Panel) {
+        Question? found = element.getQuestionByName(name);
+        if (found != null) return found;
+      }
+    }
+    return null;
+  }
+
+  List<Question> getAllQuestions() {
+    List<Question> result = [];
+    for (var element in elements) {
+      if (element is Question) {
+        result.add(element);
+      }
+      if (element is Panel) {
+        result.addAll(element.getAllQuestions());
+      }
+    }
+    return result;
   }
 }

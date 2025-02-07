@@ -38,8 +38,8 @@ class Survey extends Panel {
 
   getData() {
     var data = <String, dynamic>{};
-    for (var element in elements) {
-      if (element is Question && element.value != null) {
+    for (var element in getAllQuestions()) {
+      if (element.value != null) {
         data[element.name] = element.value;
       }
     }
@@ -47,10 +47,29 @@ class Survey extends Panel {
   }
 
   void setData(Map<String, dynamic> data) {
-    for (var element in elements) {
-      if (element is Question && data.containsKey(element.name)) {
+    for (var element in getAllQuestions()) {
+      if (data.containsKey(element.name)) {
         element.value = data[element.name];
       }
     }
+  }
+
+  @override
+  Question? getQuestionByName(String name) {
+    for (var page in pages) {
+      Question? found = page.getQuestionByName(name);
+      if (found != null) return found;
+    }
+    return super.getQuestionByName(name);
+  }
+
+  @override
+  List<Question> getAllQuestions() {
+    List<Question> result = [];
+    for (var page in pages) {
+      result.addAll(page.getAllQuestions());
+    }
+    result.addAll(super.getAllQuestions());
+    return result;
   }
 }

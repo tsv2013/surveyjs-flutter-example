@@ -86,5 +86,34 @@ void main() {
       (survey.elements[0] as Question).value = "answer2";
       expect(survey.getData(), {"question1": "answer2"});
     });
+    test('getData/setData with panels', () {
+      var json = {
+        "pages": [
+          {
+            "name": "page1",
+            "elements": [
+              {"type": "question", "name": "question1"},
+              {
+                "type": "panel",
+                "name": "panel1",
+                "elements": [
+                  {"type": "question", "name": "question2"}
+                ]
+              }
+            ]
+          }
+        ]
+      };
+      var survey = Survey(json);
+      expect(survey.getData(), {});
+      survey.setData({"question1": "answer1", "question2": "answer2"});
+      expect(survey.getQuestionByName('question1')?.value, 'answer1');
+      expect(survey.getQuestionByName('question2')?.value, 'answer2');
+      expect(
+          survey.getData(), {"question1": "answer1", "question2": "answer2"});
+      survey.getQuestionByName('question2')?.value = "answer3";
+      expect(
+          survey.getData(), {"question1": "answer1", "question2": "answer3"});
+    });
   });
 }
