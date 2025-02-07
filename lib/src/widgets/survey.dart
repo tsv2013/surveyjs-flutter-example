@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import '../questions/question.dart';
+import './panel.dart';
 import '../survey.dart';
-import '../survey_element.dart';
-import '../widget_factory.dart';
 
 class SurveyWidget extends StatelessWidget {
   final Survey survey;
@@ -10,21 +8,6 @@ class SurveyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var elements = survey.elements.map<Widget>((SurveyElement element) {
-      return Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 16.0),
-          child: Column(children: [
-            Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 8.0),
-                child: Row(children: [
-                  Text(
-                    element.title ?? '',
-                    style: const TextStyle(fontSize: 18),
-                  )
-                ])),
-            WidgetFactory.create(element.renderAs, [element])
-          ]));
-    }).toList();
     List<Widget> content = [];
     if (survey.title != null) {
       content.add(Padding(
@@ -36,13 +19,15 @@ class SurveyWidget extends StatelessWidget {
             )
           ])));
     }
-    content.addAll(elements);
+    content.add(PanelWidget(survey));
     content.add(Row(
       children: [
         TextButton.icon(
           onPressed: () {
-            (survey.elements[1] as Question).value = "Test";
-            (survey.elements[2] as Question).value = "item1";
+            survey.setData({
+              "question2": "answer1",
+              "question3": "item1",
+            });
           },
           icon: const Icon(Icons.data_array),
           label: const Text('Set data'),

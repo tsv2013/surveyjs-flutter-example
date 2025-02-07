@@ -1,8 +1,9 @@
 import 'metadata.dart';
+import 'panel.dart';
 import 'questions/question.dart';
 import 'survey_element.dart';
 
-class Survey extends SurveyElement {
+class Survey extends SurveyElement implements IPanel {
   static final description = {
     "type": "survey",
     'parent': 'element',
@@ -45,5 +46,18 @@ class Survey extends SurveyElement {
       }
     }
     return data;
+  }
+
+  void setData(Map<String, dynamic> data) {
+    for (var element in elements) {
+      if (element is Question && data.containsKey(element.name)) {
+        element.value = data[element.name];
+      }
+    }
+  }
+
+  @override
+  List<SurveyElement> getElements() {
+    return elements;
   }
 }

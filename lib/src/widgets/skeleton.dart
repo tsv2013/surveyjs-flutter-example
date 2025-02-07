@@ -8,7 +8,7 @@ class SkeletonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(border: Border.all()),
+        decoration: BoxDecoration(border: Border.all(color: Colors.red)),
         child: SizedBox(
             child: Padding(
                 padding: const EdgeInsets.all(8.0),

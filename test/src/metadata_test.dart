@@ -25,4 +25,25 @@ void main() {
       expect(propDescriptor!.type, 'number');
     });
   });
+  test('Collect parent properties', () {
+    var jsonChildDescription = {
+      "type": "child",
+      "parent": "parent",
+      "properties": [
+        'strProperty',
+      ]
+    };
+    var jsonParentDescription = {
+      "type": "parent",
+      "properties": [
+        {"name": 'numProperty', "type": 'number'},
+        {"name": 'boolProperty', "type": 'bool'}
+      ]
+    };
+    Metadata.registerObjectDescription(jsonChildDescription);
+    Metadata.registerObjectDescription(jsonParentDescription);
+    expect(
+        Metadata.findPropertyDescriptors('child').map((pd) => pd.name).toList(),
+        ['strProperty', 'numProperty', 'boolProperty']);
+  });
 }
