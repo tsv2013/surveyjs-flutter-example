@@ -1,12 +1,11 @@
 import 'metadata.dart';
 import 'panel.dart';
 import 'questions/question.dart';
-import 'survey_element.dart';
 
-class Survey extends SurveyElement implements IPanel {
+class Survey extends Panel {
   static final description = {
     "type": "survey",
-    'parent': 'element',
+    'parent': 'panel',
     "properties": [
       {"name": 'elements', "type": 'element[]'}
     ]
@@ -17,25 +16,6 @@ class Survey extends SurveyElement implements IPanel {
   registerObjectDescription() {
     super.registerObjectDescription();
     Metadata.registerObjectDescription(Survey.description);
-  }
-
-  @override
-  add(String propertyName, [dynamic value]) {
-    if (propertyName == 'elements') {
-      var els =
-          (value as List<dynamic>).map((el) => el as SurveyElement).toList();
-      super.add(propertyName, els);
-    } else {
-      super.add(propertyName, value);
-    }
-  }
-
-  List<SurveyElement> get elements {
-    return get('elements');
-  }
-
-  set elements(List<SurveyElement> elementsValue) {
-    set('elements', elementsValue);
   }
 
   getData() {
@@ -54,10 +34,5 @@ class Survey extends SurveyElement implements IPanel {
         element.value = data[element.name];
       }
     }
-  }
-
-  @override
-  List<SurveyElement> getElements() {
-    return elements;
   }
 }
