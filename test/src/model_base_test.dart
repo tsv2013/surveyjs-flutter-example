@@ -41,7 +41,6 @@ void main() {
           {"name": 'elements', "type": 'element[]'}
         ]
       });
-      Metadata.registerObjectDescription(SurveyElement.description);
       var obj = ModelBase.fromJson({
         'type': 'custom',
         'elements': [

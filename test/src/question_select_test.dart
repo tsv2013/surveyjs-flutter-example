@@ -8,8 +8,6 @@ void main() {
   group('QuestionSelect', () {
     test('Deserialize choices', () {
       ElementFactory.register('itemvalue', ItemValue.new);
-      Metadata.registerObjectDescription(ItemValue.description);
-      Metadata.registerObjectDescription(QuestionSelect.description);
       var obj = QuestionSelect({
         'choices': [
           {'text': 'Choice 1', 'value': 'item1'},

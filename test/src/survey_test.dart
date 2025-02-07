@@ -7,8 +7,6 @@ import 'package:surveyjs_flutter_example/src/survey.dart';
 
 void main() {
   setUp(() {
-    Metadata.registerObjectDescription(Survey.description);
-    Metadata.registerObjectDescription(Question.description);
     ElementFactory.register('question', Question.new);
   });
   group('Survey deserialization', () {

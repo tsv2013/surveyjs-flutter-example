@@ -1,16 +1,18 @@
+import '../metadata.dart';
 import './question_select.dart';
 
 class QuestionRadiogroup extends QuestionSelect {
   static final description = {
     'type': 'radiogroup',
-    'properties': [
-      'renderAs',
-      'name',
-      'title',
-      'value',
-      {"name": 'choices', "type": 'itemvalue[]'}
-    ]
+    'parent': 'questionselect',
+    'properties': []
   };
   QuestionRadiogroup([dynamic json])
       : super(json, QuestionRadiogroup.description['type'].toString());
+
+  @override
+  registerObjectDescription() {
+    super.registerObjectDescription();
+    Metadata.registerObjectDescription(QuestionRadiogroup.description);
+  }
 }

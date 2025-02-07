@@ -1,15 +1,22 @@
+import 'metadata.dart';
 import 'questions/question.dart';
 import 'survey_element.dart';
 
 class Survey extends SurveyElement {
   static final description = {
     "type": "survey",
+    'parent': 'element',
     "properties": [
-      'title',
       {"name": 'elements', "type": 'element[]'}
     ]
   };
   Survey([dynamic json]) : super(json, Survey.description['type'].toString());
+
+  @override
+  registerObjectDescription() {
+    super.registerObjectDescription();
+    Metadata.registerObjectDescription(Survey.description);
+  }
 
   @override
   add(String propertyName, [dynamic value]) {

@@ -8,24 +8,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:surveyjs_flutter_example/main.dart';
-import 'package:surveyjs_flutter_example/src/metadata.dart';
-import 'package:surveyjs_flutter_example/src/questions/question.dart';
+import 'package:surveyjs_flutter_example/src/element_factory.dart';
+import 'package:surveyjs_flutter_example/src/questions/question_text.dart';
 import 'package:surveyjs_flutter_example/src/survey.dart';
 import 'package:surveyjs_flutter_example/src/survey_element.dart';
+import 'package:surveyjs_flutter_example/src/widget_factory.dart';
 import 'package:surveyjs_flutter_example/src/widgets/survey.dart';
+import 'package:surveyjs_flutter_example/src/widgets/text.dart';
 
 void main() {
   testWidgets('Basic rendering test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    Metadata.registerObjectDescription(SurveyElement.description);
-    Metadata.registerObjectDescription(Question.description);
-    Metadata.registerObjectDescription(Survey.description);
+    ElementFactory.register('text', QuestionText.new);
+    WidgetFactory.register('text', TextWidget.new);
     const json = {
-      "type": "survey",
       "elements": [
-        {"type": "question", "title": "Question 1"},
-        {"type": "question", "title": "Another question title"},
+        {"type": "text", "title": "Question 1"},
+        {"type": "text", "title": "Another question title"},
       ]
     };
     var survey = Survey(json);

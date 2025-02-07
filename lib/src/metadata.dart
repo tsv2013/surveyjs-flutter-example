@@ -28,9 +28,11 @@ class PropertyDescriptor {
 
 class ObjectDescriptor {
   final String type;
+  late final String? parent;
   final _properties = <Symbol, PropertyDescriptor>{};
 
   ObjectDescriptor(this.type, dynamic jsonDescription) {
+    parent = jsonDescription['parent'];
     for (var jsonPropertyDescription in jsonDescription['properties']) {
       var propertyDescriptor =
           PropertyDescriptor.fromJson(jsonPropertyDescription);
@@ -60,8 +62,27 @@ class Metadata {
 
   static List<PropertyDescriptor> findPropertyDescriptors(String? type) {
     if (type == null) return [];
-    return Metadata._descriptors[Symbol(type)]?.properties.values.toList() ??
-        [];
+    var objectDescription = Metadata.findObjectDescriptor(type);
+    if (objectDescription == null) {
+      return [];
+    }
+    List<PropertyDescriptor> propertyDescriptors =
+        List<PropertyDescriptor>.from(
+            objectDescription!.properties.values.toList());
+    while (objectDescription != null && objectDescription.parent != null) {
+      List<PropertyDescriptor>? parentProperties = Metadata
+          ._descriptors[Symbol(objectDescription.parent!)]?.properties.values
+          .toList();
+      parentProperties?.forEach((propertyDescriptor) {
+        if (!propertyDescriptors
+            .any((pd) => pd.name == propertyDescriptor.name)) {
+          propertyDescriptors.add(propertyDescriptor);
+        }
+      });
+      objectDescription =
+          Metadata.findObjectDescriptor(objectDescription.parent!);
+    }
+    return propertyDescriptors;
   }
 
   static PropertyDescriptor? findPropertyDescriptor(

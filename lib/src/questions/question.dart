@@ -1,17 +1,23 @@
+import '../metadata.dart';
 import '../survey_element.dart';
 
 class Question extends SurveyElement {
   static final description = {
     'type': 'question',
+    'parent': 'element',
     'properties': [
-      'renderAs',
       'name',
-      'title',
       'value',
     ]
   };
   Question([dynamic json, String? type])
       : super(json, type ?? Question.description['type'].toString());
+
+  @override
+  registerObjectDescription() {
+    super.registerObjectDescription();
+    Metadata.registerObjectDescription(Question.description);
+  }
 
   dynamic get name {
     return get('name');

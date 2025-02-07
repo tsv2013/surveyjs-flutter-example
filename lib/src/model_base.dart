@@ -11,9 +11,8 @@ class ModelBase {
 
   ModelBase.fromJson(dynamic json, [String? type]) {
     this.type = type ?? (json['type'] ?? '');
-    List<PropertyDescriptor>? dynamicProperties =
-        Metadata.findPropertyDescriptors(this.type);
     // assert(type != '', "Object type shouldn't be empty");
+    List<PropertyDescriptor> dynamicProperties = getPropertyDescriptors();
 
     for (var propertyDescriptor in dynamicProperties) {
       dynamic value = json?[propertyDescriptor.name];
@@ -28,6 +27,15 @@ class ModelBase {
       }
       add(propertyDescriptor.name, value);
     }
+  }
+
+  registerObjectDescription() {}
+
+  List<PropertyDescriptor> getPropertyDescriptors() {
+    if (Metadata.findObjectDescriptor(type) == null) {
+      registerObjectDescription();
+    }
+    return Metadata.findPropertyDescriptors(type);
   }
 
   dynamic get(String key, [bool checkPropertyDefined = true]) {

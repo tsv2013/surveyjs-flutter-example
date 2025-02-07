@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 
+import '../metadata.dart';
 import './question.dart';
 
 class QuestionText extends Question {
   static final description = {
     'type': 'text',
+    'parent': 'question',
     'properties': [
       'inputType',
-      'renderAs',
-      'name',
-      'title',
-      'value',
     ]
   };
   QuestionText([dynamic json, String? type])
       : super(json, type ?? QuestionText.description['type'].toString());
+
+  @override
+  registerObjectDescription() {
+    super.registerObjectDescription();
+    Metadata.registerObjectDescription(QuestionText.description);
+  }
 
   dynamic get inputType {
     return get('inputType');

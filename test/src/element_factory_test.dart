@@ -7,7 +7,6 @@ void main() {
   group('Element factory', () {
     setUp(() {
       ElementFactory.register('question', Question.new);
-      Metadata.registerObjectDescription(Question.description);
     });
     test('Create an empty object', () {
       var question = ElementFactory.create('question');
@@ -16,7 +15,6 @@ void main() {
       expect(element.type, 'element');
     });
     test('Create an object from JSON', () {
-      ElementFactory.register('question', Question.new);
       var question = ElementFactory.create('question', [
         {'type': 'question', 'title': 'Question 1'}
       ]);

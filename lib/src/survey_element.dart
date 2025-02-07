@@ -1,4 +1,5 @@
 import './model_bloc.dart';
+import './metadata.dart';
 
 class SurveyElement extends ModelBloc {
   static final description = {
@@ -12,8 +13,15 @@ class SurveyElement extends ModelBloc {
       : super.fromJson(
             json,
             type ??
-                json['type'] ??
+                json?['type'] ??
                 SurveyElement.description['type'].toString());
+
+  @override
+  registerObjectDescription() {
+    super.registerObjectDescription();
+    Metadata.registerObjectDescription(SurveyElement.description);
+  }
+
   String? get title {
     return get('title', false);
   }

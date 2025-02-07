@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'metadata.dart';
 import 'model_base.dart';
 
 class ModelBloc extends ModelBase {

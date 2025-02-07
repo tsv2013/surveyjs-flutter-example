@@ -2,9 +2,7 @@
     "title": "My Survey",
     "elements": [
         {
-            "type": "question",
-            "name": "question1",
-            "title": "Question 1"
+            "type": "text111"
         },
         {
             "type": "text",

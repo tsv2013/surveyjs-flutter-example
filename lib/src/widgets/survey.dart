@@ -41,7 +41,7 @@ class SurveyWidget extends StatelessWidget {
       children: [
         TextButton.icon(
           onPressed: () {
-            (survey.elements[0] as Question).value = "Test";
+            (survey.elements[1] as Question).value = "Test";
             (survey.elements[2] as Question).value = "item1";
           },
           icon: const Icon(Icons.data_array),
