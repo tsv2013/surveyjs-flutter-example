@@ -6,6 +6,7 @@ abstract class IPanel {
   List<SurveyElement> getElements();
   Question? getQuestionByName(String name);
   List<Question> getAllQuestions();
+  String get navTitle => '';
 }
 
 class Panel extends SurveyElement implements IPanel {
@@ -13,6 +14,7 @@ class Panel extends SurveyElement implements IPanel {
     "type": "panel",
     'parent': 'element',
     "properties": [
+      "name",
       {"name": 'elements', "type": 'element[]'}
     ]
   };
@@ -35,6 +37,14 @@ class Panel extends SurveyElement implements IPanel {
     } else {
       super.add(propertyName, value);
     }
+  }
+
+  dynamic get name {
+    return get('name');
+  }
+
+  set name(dynamic newName) {
+    set('name', newName);
   }
 
   List<SurveyElement> get elements {
@@ -77,4 +87,7 @@ class Panel extends SurveyElement implements IPanel {
     }
     return result;
   }
+
+  @override
+  String get navTitle => title ?? name ?? '';
 }

@@ -7,6 +7,7 @@ class Survey extends Panel {
     "type": "survey",
     'parent': 'panel',
     "properties": [
+      {"name": 'showTOC', "type": 'bool'},
       {"name": 'pages', "type": 'panel[]'}
     ]
   };
@@ -107,5 +108,13 @@ class Survey extends Panel {
     }
     result.addAll(super.getAllQuestions());
     return result;
+  }
+
+  bool get showTOC {
+    return get('showTOC');
+  }
+
+  set showTOC(bool newValue) {
+    set('showTOC', newValue);
   }
 }
