@@ -36,9 +36,9 @@ void main() {
       expect(survey.type, 'survey');
       expect(survey.elements.length, 0);
       expect(survey.pages.length, 1);
-      expect(survey.pages[0].type, 'panel');
-      expect(survey.pages[0].elements.length, 1);
-      expect(survey.pages[0].elements[0].type, 'question');
+      expect((survey.pages[0] as Panel).type, 'panel');
+      expect((survey.pages[0] as Panel).elements.length, 1);
+      expect((survey.pages[0] as Panel).elements[0].type, 'question');
     });
     test('Nested panels deserialization', () {
       var json = {
@@ -62,13 +62,14 @@ void main() {
       expect(survey.type, 'survey');
       expect(survey.elements.length, 0);
       expect(survey.pages.length, 1);
-      expect(survey.pages[0].type, 'panel');
-      expect(survey.pages[0].elements.length, 2);
-      expect(survey.pages[0].elements[0].type, 'question');
-      expect(survey.pages[0].elements[1].type, 'panel');
-      expect((survey.pages[0].elements[1] as Panel).elements.length, 1);
+      expect((survey.pages[0] as Panel).type, 'panel');
+      expect((survey.pages[0] as Panel).elements.length, 2);
+      expect((survey.pages[0] as Panel).elements[0].type, 'question');
+      expect((survey.pages[0] as Panel).elements[1].type, 'panel');
       expect(
-          (survey.pages[0].elements[1] as Panel).elements[0].type, 'question');
+          ((survey.pages[0] as Panel).elements[1] as Panel).elements.length, 1);
+      expect(((survey.pages[0] as Panel).elements[1] as Panel).elements[0].type,
+          'question');
     });
   });
   group('Survey operation', () {
