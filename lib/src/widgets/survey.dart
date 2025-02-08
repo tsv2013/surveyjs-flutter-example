@@ -10,8 +10,9 @@ class SurveyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream:
-            (survey.getChangesStream('currentPage') as StreamController).stream,
+        stream: (survey.getChangesStreamController('currentPage')
+                as StreamController)
+            .stream,
         initialData: survey.currentPage,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Scaffold(

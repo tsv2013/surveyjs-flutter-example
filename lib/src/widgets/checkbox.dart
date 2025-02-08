@@ -11,7 +11,8 @@ class CheckboxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: (questionSelect.getChangesStream('value') as StreamController)
+        stream: (questionSelect.getChangesStreamController('value')
+                as StreamController)
             .stream,
         initialData: questionSelect.value,
         builder: (BuildContext context, AsyncSnapshot snapshot) {

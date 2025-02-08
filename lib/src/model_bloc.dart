@@ -17,10 +17,11 @@ class ModelBloc extends ModelBase {
   @override
   set(String key, dynamic value) {
     super.set(key, value);
-    getChangesStream(key).add(value);
+    getChangesStreamController(key).add(value);
   }
 
-  getChangesStream(String propertyName) => _notifiers[Symbol(propertyName)];
+  getChangesStreamController<T>(String propertyName) =>
+      _notifiers[Symbol(propertyName)] as StreamController<T>;
 
   void dispose() {
     for (var stream in _notifiers.values) {
