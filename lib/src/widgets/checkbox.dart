@@ -7,7 +7,6 @@ class CheckboxWidget extends StatelessWidget {
   final QuestionSelect questionSelect;
   const CheckboxWidget(this.questionSelect, {super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

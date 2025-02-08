@@ -7,7 +7,6 @@ class TextWidget extends StatelessWidget {
   final controller = TextEditingController();
   TextWidget(this.question, {super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
