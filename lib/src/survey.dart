@@ -10,7 +10,13 @@ class Survey extends Panel {
       {"name": 'pages', "type": 'panel[]'}
     ]
   };
-  Survey([dynamic json]) : super(json, Survey.description['type'].toString());
+  Survey([dynamic json]) : super(json, Survey.description['type'].toString()) {
+    if (pages.isNotEmpty) {
+      add('currentPage', pages[0]);
+    } else {
+      add('currentPage', this);
+    }
+  }
 
   @override
   registerObjectDescription() {
@@ -28,12 +34,42 @@ class Survey extends Panel {
     }
   }
 
-  List<Panel> get pages {
+  List<IPanel> get pages {
     return get('pages');
   }
 
-  set pages(List<Panel> pagesValue) {
+  set pages(List<IPanel> pagesValue) {
     set('pages', pagesValue);
+  }
+
+  IPanel get currentPage {
+    return get('currentPage');
+  }
+
+  set currentPage(IPanel page) {
+    set('currentPage', page);
+  }
+
+  bool get isFirstPage {
+    return pages.isNotEmpty && pages.indexOf(currentPage) == 0;
+  }
+
+  bool get isLastPage {
+    return pages.isNotEmpty && pages.indexOf(currentPage) == pages.length - 1;
+  }
+
+  goPreviousPage() {
+    if (isFirstPage) return;
+    currentPage = pages[pages.indexOf(currentPage) - 1];
+  }
+
+  goNextPage() {
+    if (isLastPage) return;
+    currentPage = pages[pages.indexOf(currentPage) + 1];
+  }
+
+  complete() {
+    // var data = getData();
   }
 
   getData() {

@@ -4,6 +4,8 @@ import 'survey_element.dart';
 
 abstract class IPanel {
   List<SurveyElement> getElements();
+  Question? getQuestionByName(String name);
+  List<Question> getAllQuestions();
 }
 
 class Panel extends SurveyElement implements IPanel {
@@ -48,6 +50,7 @@ class Panel extends SurveyElement implements IPanel {
     return elements;
   }
 
+  @override
   Question? getQuestionByName(String name) {
     for (var element in elements) {
       if (element is Question && element.name == name) {
@@ -61,6 +64,7 @@ class Panel extends SurveyElement implements IPanel {
     return null;
   }
 
+  @override
   List<Question> getAllQuestions() {
     List<Question> result = [];
     for (var element in elements) {
