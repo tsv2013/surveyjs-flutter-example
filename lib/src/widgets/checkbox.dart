@@ -10,7 +10,7 @@ class CheckboxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: questionSelect.getChangesStreamController('value').stream,
-        initialData: questionSelect.value,
+        initialData: questionSelect.value ?? [],
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Column(
             children: questionSelect.choices.map<Widget>((ItemValue itemValue) {

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:surveyjs_flutter_example/src/metadata.dart';
 import 'package:surveyjs_flutter_example/src/model_base.dart';
-import 'package:surveyjs_flutter_example/src/survey_element.dart';
 
 void main() {
   group('BsaeModel', () {

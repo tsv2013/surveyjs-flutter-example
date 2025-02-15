@@ -111,7 +111,7 @@ class Survey extends Panel {
   }
 
   bool get showTOC {
-    return get('showTOC');
+    return get('showTOC') ?? false;
   }
 
   set showTOC(bool newValue) {

@@ -11,7 +11,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:surveyjs_flutter_example/src/element_factory.dart';
 import 'package:surveyjs_flutter_example/src/questions/question_text.dart';
 import 'package:surveyjs_flutter_example/src/survey.dart';
-import 'package:surveyjs_flutter_example/src/survey_element.dart';
 import 'package:surveyjs_flutter_example/src/widget_factory.dart';
 import 'package:surveyjs_flutter_example/src/widgets/survey.dart';
 import 'package:surveyjs_flutter_example/src/widgets/text.dart';
