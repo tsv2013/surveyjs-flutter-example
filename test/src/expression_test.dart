@@ -1,8 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter_test/flutter_test.dart';
 import 'package:petitparser/reflection.dart';
 import 'package:surveyjs_flutter_example/src/expression/parser.dart';
-import 'package:test/test.dart';
 
 void verify(String input, num result,
     {Map<String, num> variables = const {}, double epsilon = 0.00001}) {
