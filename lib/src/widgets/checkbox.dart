@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import '../questions/item_value.dart';
 import '../questions/question_select.dart';
@@ -10,9 +9,7 @@ class CheckboxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: (questionSelect.getChangesStreamController('value')
-                as StreamController)
-            .stream,
+        stream: questionSelect.getChangesStreamController('value').stream,
         initialData: questionSelect.value,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Column(

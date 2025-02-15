@@ -11,9 +11,7 @@ class QuestionWidget extends StatelessWidget {
     return Column(
       children: [
         StreamBuilder(
-            stream: (question.getChangesStreamController('value')
-                    as StreamController)
-                .stream,
+            stream: question.getChangesStreamController('value').stream,
             initialData: question.value,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               var controller = TextEditingController();

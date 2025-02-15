@@ -20,7 +20,7 @@ class ModelBloc extends ModelBase {
     getChangesStreamController(key).add(value);
   }
 
-  getChangesStreamController<T>(String propertyName) =>
+  StreamController<T> getChangesStreamController<T>(String propertyName) =>
       _notifiers[Symbol(propertyName)] as StreamController<T>;
 
   void dispose() {

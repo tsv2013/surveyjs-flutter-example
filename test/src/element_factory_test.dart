@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:surveyjs_flutter_example/src/element_factory.dart';
-import 'package:surveyjs_flutter_example/src/metadata.dart';
 import 'package:surveyjs_flutter_example/src/questions/question.dart';
 
 void main() {

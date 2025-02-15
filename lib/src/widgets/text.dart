@@ -11,9 +11,7 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
         initialData: question.value,
-        stream:
-            (question.getChangesStreamController('value') as StreamController)
-                .stream,
+        stream: question.getChangesStreamController('value').stream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           controller.value = controller.value.copyWith(text: snapshot.data);
           return TextFormField(
