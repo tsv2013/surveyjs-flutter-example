@@ -40,6 +40,6 @@ class ExpressionQuestion extends Question {
   }
 
   void eval() {
-    value = ast?.eval({});
+    value = ast?.eval(contextProvider?.getVariables() ?? {});
   }
 }

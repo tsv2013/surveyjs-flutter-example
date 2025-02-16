@@ -116,5 +116,20 @@ void main() {
       expect(
           survey.getData(), {"question1": "answer1", "question2": "answer3"});
     });
+    test('IExpressionContextProvider', () {
+      var json = {
+        "elements": [
+          {"type": "question", "name": "question1"}
+        ]
+      };
+      var survey = Survey(json);
+      var q1 = survey.getQuestionByName('question1');
+      expect(q1, isNotNull);
+      expect(q1!.contextProvider, survey);
+      expect(survey.getVariables(), {});
+      survey.setData({"question1": "answer1"});
+      expect(survey.getVariables(), {"question1": "answer1"});
+      expect(q1.contextProvider!.getVariables(), {"question1": "answer1"});
+    });
   });
 }

@@ -1,5 +1,6 @@
-import './model_bloc.dart';
-import './metadata.dart';
+import 'model_bloc.dart';
+import 'metadata.dart';
+import 'expression_context.dart';
 
 class SurveyElement extends ModelBloc {
   static final description = {
@@ -37,4 +38,8 @@ class SurveyElement extends ModelBloc {
   set renderAs(String newValue) {
     set('renderAs', newValue);
   }
+
+  IExpressionContextProvider? Function()? getContextProvider;
+  IExpressionContextProvider? get contextProvider =>
+      getContextProvider != null ? getContextProvider!() : null;
 }

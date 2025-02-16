@@ -1,8 +1,9 @@
+import 'expression_context.dart';
 import 'metadata.dart';
 import 'panel.dart';
 import 'questions/question.dart';
 
-class Survey extends Panel {
+class Survey extends Panel implements IExpressionContextProvider {
   static final description = {
     "type": "survey",
     'parent': 'panel',
@@ -17,6 +18,7 @@ class Survey extends Panel {
     } else {
       add('currentPage', this);
     }
+    getContextProvider = () => this;
   }
 
   @override
@@ -29,6 +31,9 @@ class Survey extends Panel {
   add(String propertyName, [dynamic value]) {
     if (propertyName == 'pages') {
       var els = (value as List<dynamic>).map((el) => el as Panel).toList();
+      for (var el in els) {
+        el.getContextProvider = () => this;
+      }
       super.add(propertyName, els);
     } else {
       super.add(propertyName, value);
@@ -73,7 +78,7 @@ class Survey extends Panel {
     // var data = getData();
   }
 
-  getData() {
+  Map<String, dynamic> getData() {
     var data = <String, dynamic>{};
     for (var element in getAllQuestions()) {
       if (element.value != null) {
@@ -81,6 +86,11 @@ class Survey extends Panel {
       }
     }
     return data;
+  }
+
+  @override
+  Map<String, dynamic> getVariables() {
+    return getData();
   }
 
   void setData(Map<String, dynamic> data) {
