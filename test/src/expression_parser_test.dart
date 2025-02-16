@@ -81,4 +81,9 @@ void main() {
     verify('1 + (2 * 3)', 7);
     verify('(1 + 2) * 3', 9);
   });
+  test('question reference', () {
+    verify('{q1}', 42, variables: {'q1': 42});
+    verify('{q1} / {q2}', 0.5, variables: {'q1': 1, 'q2': 2});
+    expect(() => verify('{x}', double.nan, variables: {}), throwsArgumentError);
+  });
 }

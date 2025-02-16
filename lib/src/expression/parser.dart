@@ -15,6 +15,11 @@ final parser = () {
         .flatten('number expected')
         .trim()
         .map(_createValue))
+    ..primitive(seq3(
+      char('{').trim(),
+      seq2(letter(), word().star()).flatten('question name expected').trim(),
+      char('}').trim(),
+    ).map3((_, name, __) => QuestionValue(name)))
     ..primitive(seq2(
             seq2(letter(), word().star()).flatten('name expected').trim(),
             seq3(
