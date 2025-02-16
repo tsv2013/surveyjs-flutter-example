@@ -4,7 +4,7 @@ import 'package:surveyjs_flutter_example/src/questions/item_value.dart';
 import 'package:surveyjs_flutter_example/src/questions/select_question.dart';
 
 void main() {
-  group('QuestionSelect', () {
+  group('SelectQuestion', () {
     test('Deserialize choices', () {
       ElementFactory.register('itemvalue', ItemValue.new);
       var obj = SelectQuestion({
