@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:surveyjs_flutter_example/src/element_factory.dart';
-import 'package:surveyjs_flutter_example/src/questions/question_text.dart';
+import 'package:surveyjs_flutter_example/src/questions/text_question.dart';
 import 'package:surveyjs_flutter_example/src/survey.dart';
 import 'package:surveyjs_flutter_example/src/widget_factory.dart';
 import 'package:surveyjs_flutter_example/src/widgets/survey.dart';
@@ -18,7 +18,7 @@ import 'package:surveyjs_flutter_example/src/widgets/text.dart';
 void main() {
   testWidgets('Basic rendering test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    ElementFactory.register('text', QuestionText.new);
+    ElementFactory.register('text', TextQuestion.new);
     WidgetFactory.register('text', TextWidget.new);
     const json = {
       "elements": [

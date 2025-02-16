@@ -4,10 +4,10 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'src/element_factory.dart';
 import 'src/panel.dart';
 import 'src/questions/item_value.dart';
-import 'src/questions/question_checkbox.dart';
-import 'src/questions/question_radiogroup.dart';
-import 'src/questions/question_select.dart';
-import 'src/questions/question_text.dart';
+import 'src/questions/checkbox_question.dart';
+import 'src/questions/radiogroup_question.dart';
+import 'src/questions/select_question.dart';
+import 'src/questions/text_question.dart';
 import 'src/questions/question.dart';
 import 'src/survey.dart';
 import 'src/widget_factory.dart';
@@ -24,11 +24,11 @@ Future<Map> loadSurveyJson(String fileName) async {
 
 void main() {
   ElementFactory.register('itemvalue', ItemValue.new);
-  ElementFactory.register('questionselect', QuestionSelect.new);
-  ElementFactory.register('checkbox', QuestionCheckbox.new);
-  ElementFactory.register('radiogroup', QuestionRadiogroup.new);
+  ElementFactory.register('questionselect', SelectQuestion.new);
+  ElementFactory.register('checkbox', CheckboxQuestion.new);
+  ElementFactory.register('radiogroup', RadiogroupQuestion.new);
   ElementFactory.register('question', Question.new);
-  ElementFactory.register('text', QuestionText.new);
+  ElementFactory.register('text', TextQuestion.new);
   ElementFactory.register('panel', Panel.new);
 
   WidgetFactory.register('question', QuestionWidget.new);

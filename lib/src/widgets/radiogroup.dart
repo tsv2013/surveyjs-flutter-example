@@ -1,10 +1,9 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import '../questions/item_value.dart';
-import '../questions/question_select.dart';
+import '../questions/select_question.dart';
 
 class RadioGroupWidget extends StatelessWidget {
-  final QuestionSelect questionSelect;
+  final SelectQuestion questionSelect;
   const RadioGroupWidget(this.questionSelect, {super.key});
 
   @override

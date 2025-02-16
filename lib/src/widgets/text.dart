@@ -1,9 +1,8 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import '../questions/question_text.dart';
+import '../questions/text_question.dart';
 
 class TextWidget extends StatelessWidget {
-  final QuestionText question;
+  final TextQuestion question;
   final controller = TextEditingController();
   TextWidget(this.question, {super.key});
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../metadata.dart';
 import './question.dart';
 
-class QuestionText extends Question {
+class TextQuestion extends Question {
   static final description = {
     'type': 'text',
     'parent': 'question',
@@ -11,13 +11,13 @@ class QuestionText extends Question {
       'inputType',
     ]
   };
-  QuestionText([dynamic json, String? type])
-      : super(json, type ?? QuestionText.description['type'].toString());
+  TextQuestion([dynamic json, String? type])
+      : super(json, type ?? TextQuestion.description['type'].toString());
 
   @override
   registerObjectDescription() {
     super.registerObjectDescription();
-    Metadata.registerObjectDescription(QuestionText.description);
+    Metadata.registerObjectDescription(TextQuestion.description);
   }
 
   dynamic get inputType {

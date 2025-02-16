@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../questions/item_value.dart';
-import '../questions/question_select.dart';
+import '../questions/select_question.dart';
 
 class CheckboxWidget extends StatelessWidget {
-  final QuestionSelect questionSelect;
+  final SelectQuestion questionSelect;
   const CheckboxWidget(this.questionSelect, {super.key});
 
   @override

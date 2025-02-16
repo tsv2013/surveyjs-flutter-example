@@ -2,7 +2,7 @@ import '../metadata.dart';
 import './item_value.dart';
 import './question.dart';
 
-class QuestionSelect extends Question {
+class SelectQuestion extends Question {
   static final description = {
     'type': 'questionselect',
     'parent': 'question',
@@ -10,13 +10,13 @@ class QuestionSelect extends Question {
       {"name": 'choices', "type": 'itemvalue[]'}
     ]
   };
-  QuestionSelect([dynamic json, String? type])
-      : super(json, type ?? QuestionSelect.description['type'].toString());
+  SelectQuestion([dynamic json, String? type])
+      : super(json, type ?? SelectQuestion.description['type'].toString());
 
   @override
   registerObjectDescription() {
     super.registerObjectDescription();
-    Metadata.registerObjectDescription(QuestionSelect.description);
+    Metadata.registerObjectDescription(SelectQuestion.description);
   }
 
   @override
