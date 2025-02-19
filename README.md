@@ -16,15 +16,15 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ## Roadmap
- - [ ] Survey elements deserialization
- - [ ] Properties reacitvity concept
- - [ ] Basic layout, pages, navigation, TOC
- - [ ] Text question
- - [ ] Rediogroup question
- - [ ] Checkbox question
- - [ ] Expression parser
- - [ ] Expression question
- - [ ] Subscribe expressions to mentioned questions
+ - [x] Survey elements deserialization
+ - [x] Properties reacitvity concept
+ - [x] Basic layout, pages, navigation, TOC
+ - [x] Text question
+ - [x] Rediogroup question
+ - [x] Checkbox question
+ - [x] Expression parser
+ - [x] Expression question
+ - [x] Subscribe expressions to mentioned questions
  - [ ] Pub package
  - [ ] I18n concept
  - [ ] Actions everywhere - title actions, nav bar and so on
