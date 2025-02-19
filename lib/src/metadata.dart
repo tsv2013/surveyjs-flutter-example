@@ -68,7 +68,7 @@ class Metadata {
     }
     List<PropertyDescriptor> propertyDescriptors =
         List<PropertyDescriptor>.from(
-            objectDescription!.properties.values.toList());
+            objectDescription.properties.values.toList());
     while (objectDescription != null && objectDescription.parent != null) {
       List<PropertyDescriptor>? parentProperties = Metadata
           ._descriptors[Symbol(objectDescription.parent!)]?.properties.values
