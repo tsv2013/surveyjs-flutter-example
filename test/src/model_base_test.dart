@@ -1,10 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:surveyjs_flutter_example/src/metadata.dart';
 import 'package:surveyjs_flutter_example/src/model_base.dart';
+import 'package:surveyjs_flutter_example/src/model_bloc.dart';
 
 void main() {
-  group('BsaeModel', () {
+  group('ModelBase', () {
     test('Simple deserialization', () {
       var raw = '''{"type": "text", "value": "some string"}''';
       var jsonObj = json.decode(raw);
@@ -53,5 +55,22 @@ void main() {
       expect(elements[0].type, 'element');
       expect(elements[0].title, 'Title');
     });
+  });
+  group('ModelBloc', () {
+    test('Changes stream controller add stream', () async {
+      var controller = StreamController.broadcast();
+      controller.addStream(Stream.fromIterable([1, 2, 3]));
+      await expectLater(controller.stream, emitsInOrder([1, 2, 3]));
+    }, timeout: const Timeout(Duration(milliseconds: 10)));
+    test('Notify value changed', () async {
+      Completer completer = Completer();
+      var obj = ModelBloc.fromJson({});
+      obj.add('value');
+      obj.getChangesStreamController('value').stream.listen((event) {
+        completer.complete(event);
+      });
+      obj['value'] = 'some string';
+      expect(await completer.future, 'some string');
+    }, timeout: const Timeout(Duration(milliseconds: 10)));
   });
 }

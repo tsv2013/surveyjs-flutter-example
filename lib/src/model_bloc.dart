@@ -17,7 +17,7 @@ class ModelBloc extends ModelBase {
   @override
   set(String key, dynamic value) {
     super.set(key, value);
-    getChangesStreamController(key).add(value);
+    getChangesStreamController(key).sink.add(value);
   }
 
   StreamController<T> getChangesStreamController<T>(String propertyName) =>

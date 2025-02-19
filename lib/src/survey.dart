@@ -2,6 +2,7 @@ import 'expression_context.dart';
 import 'metadata.dart';
 import 'panel.dart';
 import 'questions/question.dart';
+import 'survey_element.dart';
 
 class Survey extends Panel implements IExpressionContextProvider {
   static final description = {
@@ -18,7 +19,7 @@ class Survey extends Panel implements IExpressionContextProvider {
     } else {
       add('currentPage', this);
     }
-    getContextProvider = () => this;
+    initialize();
   }
 
   @override
@@ -28,12 +29,17 @@ class Survey extends Panel implements IExpressionContextProvider {
   }
 
   @override
+  void initialize() {
+    visitAllElements((SurveyElement el) {
+      el.contextProvider = this;
+      el.initialize();
+    });
+  }
+
+  @override
   add(String propertyName, [dynamic value]) {
     if (propertyName == 'pages') {
       var els = (value as List<dynamic>).map((el) => el as Panel).toList();
-      for (var el in els) {
-        el.getContextProvider = () => this;
-      }
       super.add(propertyName, els);
     } else {
       super.add(propertyName, value);
@@ -126,5 +132,13 @@ class Survey extends Panel implements IExpressionContextProvider {
 
   set showTOC(bool newValue) {
     set('showTOC', newValue);
+  }
+
+  @override
+  void visitAllElements(void Function(SurveyElement el) action) {
+    for (var page in pages) {
+      action(page as SurveyElement);
+    }
+    super.visitAllElements(action);
   }
 }

@@ -39,7 +39,7 @@ class SurveyElement extends ModelBloc {
     set('renderAs', newValue);
   }
 
-  IExpressionContextProvider? Function()? getContextProvider;
-  IExpressionContextProvider? get contextProvider =>
-      getContextProvider != null ? getContextProvider!() : null;
+  IExpressionContextProvider? contextProvider;
+
+  void initialize() {}
 }

@@ -2,6 +2,7 @@
 abstract class Expression {
   /// Evaluates the expression with the provided [variables].
   num eval(Map<String, dynamic> variables);
+  List<String> getDependencies() => [];
 }
 
 /// A value expression.
@@ -37,6 +38,9 @@ class QuestionValue extends Variable {
   QuestionValue(super.name);
 
   @override
+  List<String> getDependencies() => [name];
+
+  @override
   String toString() => 'Question{$name}';
 }
 
@@ -51,6 +55,15 @@ class Application extends Expression {
   @override
   num eval(Map<String, dynamic> variables) => Function.apply(
       function, arguments.map((argument) => argument.eval(variables)).toList());
+
+  @override
+  List<String> getDependencies() {
+    var dependencies = <String>{};
+    for (var argument in arguments) {
+      dependencies.addAll(argument.getDependencies());
+    }
+    return dependencies.toList();
+  }
 
   @override
   String toString() => 'Application{$name}';

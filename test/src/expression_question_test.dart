@@ -12,6 +12,11 @@ class TestExpressionContextProvider implements IExpressionContextProvider {
   }
 
   Map<String, dynamic> variables = {};
+
+  @override
+  Question? getQuestionByName(String questionName) {
+    throw UnimplementedError();
+  }
 }
 
 void main() {
@@ -19,32 +24,36 @@ void main() {
     ElementFactory.register('question', Question.new);
     ElementFactory.register('expression', ExpressionQuestion.new);
   });
-  group('QuestionSelect', () {
+  group('ExpressionQuestion', () {
     test('Deserialize expression', () {
       var q = ExpressionQuestion({'expression': '1+1'});
       expect(q.type, 'expression');
       expect(q.expression, '1+1');
+      expect(q.ast, isNull);
+      expect(q.value, isNull);
+      q.initialize();
       expect(q.ast, isNotNull);
-      expect(q.value, null);
+      expect(q.value, isNull);
     });
     test('Evaluate simple expression', () {
       var q = ExpressionQuestion({'expression': '1+1'});
+      q.initialize();
       expect(q.value, null);
       q.eval();
       expect(q.value, 2.0);
     });
     test('Reference another question through context provider', () {
       var q = ExpressionQuestion({'expression': 'q1'});
+      q.initialize();
       expect(q.value, null);
       expect(() => {q.eval(), true}, throwsArgumentError);
       TestExpressionContextProvider contextProvider =
-          TestExpressionContextProvider();
-      q.getContextProvider = () => contextProvider;
-      contextProvider.variables['q1'] = 42;
+          TestExpressionContextProvider()..variables['q1'] = 42;
+      q.contextProvider = contextProvider;
       q.eval();
       expect(q.value, 42);
     });
-    test('Reference another question in survey', () {
+    test('Reference another question in survey', () async {
       var json = {
         "elements": [
           {"type": "question", "name": "question1"},
@@ -61,9 +70,10 @@ void main() {
       expect(q1.value, null);
       expect(q2.value, null);
       q1.value = 42;
-      expect(q1.value, 42);
-      expect(q2.value, null);
-      q2.eval();
+      // expect(q1.value, 42);
+      // expect(q2.value, null);
+      // q2.eval(); // q2 should be updated automatically on q1 value change
+      await Future.delayed(const Duration(milliseconds: 10));
       expect(q1.value, 42);
       expect(q2.value, 42);
     });

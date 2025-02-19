@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../expression/ast.dart';
 import '../expression/parser.dart';
 import '../metadata.dart';
@@ -22,24 +24,39 @@ class ExpressionQuestion extends Question {
     Metadata.registerObjectDescription(ExpressionQuestion.description);
   }
 
-  @override
-  add(String propertyName, [dynamic value]) {
-    super.add(propertyName, value);
-    if (propertyName == 'expression') {
-      expression = value as String?;
-    }
-  }
-
   String? get expression {
     return get('expression');
   }
 
   set expression(String? newValue) {
     set('expression', newValue);
-    ast = parser.parse(newValue ?? '').value;
+    initialize();
   }
 
   void eval() {
     value = ast?.eval(contextProvider?.getVariables() ?? {});
+  }
+
+  final List<StreamSubscription<dynamic>> _dependencies = [];
+
+  @override
+  void initialize() {
+    super.initialize();
+    for (var dep in _dependencies) {
+      dep.cancel();
+    }
+    _dependencies.clear();
+    ast = parser.parse(expression ?? '').value;
+    if (contextProvider != null) {
+      ast!.getDependencies().forEach((questionName) {
+        var question = contextProvider!.getQuestionByName(questionName);
+        if (question != null) {
+          _dependencies.add(
+              question.getChangesStreamController('value').stream.listen((_) {
+            eval();
+          }));
+        }
+      });
+    }
   }
 }

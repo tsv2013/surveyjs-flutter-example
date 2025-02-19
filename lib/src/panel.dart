@@ -33,9 +33,6 @@ class Panel extends SurveyElement implements IPanel {
     if (propertyName == 'elements') {
       var els =
           (value as List<dynamic>).map((el) => el as SurveyElement).toList();
-      for (var el in els) {
-        el.getContextProvider = () => contextProvider;
-      }
       super.add(propertyName, els);
     } else {
       super.add(propertyName, value);
@@ -93,4 +90,13 @@ class Panel extends SurveyElement implements IPanel {
 
   @override
   String get navTitle => title ?? name ?? '';
+
+  void visitAllElements(void Function(SurveyElement el) action) {
+    for (var element in elements) {
+      action(element);
+      if (element is Panel) {
+        element.visitAllElements(action);
+      }
+    }
+  }
 }

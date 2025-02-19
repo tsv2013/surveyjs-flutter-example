@@ -86,4 +86,12 @@ void main() {
     verify('{q1} / {q2}', 0.5, variables: {'q1': 1, 'q2': 2});
     expect(() => verify('{x}', double.nan, variables: {}), throwsArgumentError);
   });
+  test('getDependencies', () {
+    var ast = parser.parse('var1').value;
+    expect(ast.getDependencies(), []);
+    ast = parser.parse('{q1}').value;
+    expect(ast.getDependencies(), ['q1']);
+    ast = parser.parse('{q1} / ({q2} + 1)').value;
+    expect(ast.getDependencies(), ['q1', 'q2']);
+  });
 }
