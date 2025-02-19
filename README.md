@@ -1,10 +1,10 @@
 # surveyjs_flutter_example
 
-A new Flutter project.
+Flutter SurveyJS Runner library.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a starting point for a Flutter application implementing SurveyJS JSON runner.
 
 A few resources to get you started if this is your first Flutter project:
 
