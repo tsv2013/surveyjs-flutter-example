@@ -6,6 +6,12 @@
             "name": "page1",
             "elements": [
                 {
+                    "type": "expression",
+                    "name": "question1",
+                    "expression": "{question2}",
+                    "title": "Expression question title - get value from question2"
+                },
+                {
                     "type": "text",
                     "name": "question2",
                     "inputType": "date",

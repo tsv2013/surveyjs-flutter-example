@@ -138,6 +138,7 @@ class Survey extends Panel implements IExpressionContextProvider {
   void visitAllElements(void Function(SurveyElement el) action) {
     for (var page in pages) {
       action(page as SurveyElement);
+      (page as Panel).visitAllElements(action);
     }
     super.visitAllElements(action);
   }

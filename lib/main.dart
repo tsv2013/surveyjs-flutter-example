@@ -4,6 +4,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'src/element_factory.dart';
 import 'src/panel.dart';
 import 'src/questions/item_value.dart';
+import 'src/questions/expression_question.dart';
 import 'src/questions/checkbox_question.dart';
 import 'src/questions/radiogroup_question.dart';
 import 'src/questions/select_question.dart';
@@ -12,6 +13,7 @@ import 'src/questions/question.dart';
 import 'src/survey.dart';
 import 'src/widget_factory.dart';
 import 'src/widgets/checkbox.dart';
+import 'src/widgets/expression.dart';
 import 'src/widgets/panel.dart';
 import 'src/widgets/radiogroup.dart';
 import 'src/widgets/question.dart';
@@ -30,12 +32,14 @@ void main() {
   ElementFactory.register('question', Question.new);
   ElementFactory.register('text', TextQuestion.new);
   ElementFactory.register('panel', Panel.new);
+  ElementFactory.register('expression', ExpressionQuestion.new);
 
   WidgetFactory.register('question', QuestionWidget.new);
   WidgetFactory.register('checkbox', CheckboxWidget.new);
   WidgetFactory.register('radiogroup', RadioGroupWidget.new);
   WidgetFactory.register('text', TextWidget.new);
   WidgetFactory.register('panel', PanelWidget.new);
+  WidgetFactory.register('expression', ExpressionWidget.new);
 
   runApp(const MyApp());
 }

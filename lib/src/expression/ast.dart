@@ -1,7 +1,7 @@
 /// An abstract expression that can be evaluated.
 abstract class Expression {
   /// Evaluates the expression with the provided [variables].
-  num eval(Map<String, dynamic> variables);
+  dynamic eval(Map<String, dynamic> variables);
   List<String> getDependencies() => [];
 }
 
@@ -12,7 +12,7 @@ class Value extends Expression {
   final num value;
 
   @override
-  num eval(Map<String, dynamic> variables) => value;
+  dynamic eval(Map<String, dynamic> variables) => value;
 
   @override
   String toString() => 'Value{$value}';
@@ -25,7 +25,7 @@ class Variable extends Expression {
   final String name;
 
   @override
-  num eval(Map<String, dynamic> variables) => variables.containsKey(name)
+  dynamic eval(Map<String, dynamic> variables) => variables.containsKey(name)
       ? variables[name]!
       : throw ArgumentError.value(name, 'Unknown variable');
 
@@ -53,7 +53,7 @@ class Application extends Expression {
   final Function function;
 
   @override
-  num eval(Map<String, dynamic> variables) => Function.apply(
+  dynamic eval(Map<String, dynamic> variables) => Function.apply(
       function, arguments.map((argument) => argument.eval(variables)).toList());
 
   @override
