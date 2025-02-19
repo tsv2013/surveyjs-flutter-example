@@ -28,10 +28,10 @@ class TextQuestion extends Question {
     set('inputType', newValue);
   }
 
-  @override
-  String get renderAs {
-    return super.renderAs;
-  }
+  // @override
+  // String get renderAs {
+  //   return super.renderAs;
+  // }
 
   getKeyboardType() {
     switch (inputType?.toString()) {
