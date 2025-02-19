@@ -1,3 +1,5 @@
+[![SurveyJS Flutter project commit check action](https://github.com/tsv2013/surveyjs-flutter-example/actions/workflows/commit-checks.yml/badge.svg)](https://github.com/tsv2013/surveyjs-flutter-example/actions/workflows/commit-checks.yml)
+
 # surveyjs_flutter_example
 
 Flutter SurveyJS Runner library.
